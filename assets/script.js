@@ -75,7 +75,7 @@ const scrollContentLine = (direction = "right") => {
   }
   if (typeof direction === "number") {
     currentContentScroll = Math.max(Math.min(direction + currentContentScroll, 0), -maxScrollLength)
-    let displayMult = 2
+    let displayMult = 3
     if (countVisibleContentWrapper === 1) displayMult = 0.75
     currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * displayMult / contentSectionWidth / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
   }
