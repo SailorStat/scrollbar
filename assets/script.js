@@ -65,7 +65,6 @@ const scrollLine = document.querySelector(".scroll__line")
 const scrollLineWidth = scrollLine.offsetWidth
 
 const scrollContentLine = (direction = "right") => {
-  console.log(direction)
   if (direction === "right") {
     currentContentScroll = Math.max(currentContentScroll - scrollSize, -maxScrollLength)
     currentLineScroll = Math.min((currentLineScroll + (scrollTrackWidth / (contentWrappers.length - countVisibleContentWrapper))), (scrollTrackWidth - scrollLineWidth))
