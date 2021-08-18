@@ -65,6 +65,7 @@ const scrollLine = document.querySelector(".scroll__line")
 const scrollLineWidth = scrollLine.offsetWidth
 
 const scrollContentLine = (direction = "right") => {
+  console.log(direction)
   if (direction === "right") {
     currentContentScroll = Math.max(currentContentScroll - scrollSize, -maxScrollLength)
     currentLineScroll = Math.min((currentLineScroll + (scrollTrackWidth / (contentWrappers.length - countVisibleContentWrapper))), (scrollTrackWidth - scrollLineWidth))
@@ -76,7 +77,7 @@ const scrollContentLine = (direction = "right") => {
   if (typeof direction === "number") {
     currentContentScroll = Math.max(Math.min(direction + currentContentScroll, 0), -maxScrollLength)
     let displayMult = 2
-    if (countVisibleContentWrapper === 1) displayMult = 3
+    if (countVisibleContentWrapper === 1) displayMult = 1
     currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * displayMult / contentSectionWidth / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
   }
   
@@ -95,10 +96,8 @@ document.addEventListener("click", onScrollButtonClick)
 //* Add autoscroll
 autoscroll = setInterval(scrollContentLine, 4000)
 
-
 //* Add pointerscroll
 contentLine.onpointerdown = (event) => {
-  clearInterval(autoscroll)
   let position = event.pageX
 
   const onPointerMove = (event) => {
@@ -111,9 +110,8 @@ contentLine.onpointerdown = (event) => {
   document.onpointerup = () => {
     document.removeEventListener('pointermove', onPointerMove);
     contentLine.pointerup = null
-    autoscroll = setInterval(scrollContentLine, 4000)
   }
   contentLine.ondragstart = () => {
-    return false;
+    return true;
   }
 }
