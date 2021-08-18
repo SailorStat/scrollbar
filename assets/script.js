@@ -39,6 +39,7 @@ const resizeMargin = () => {
     countVisibleContentWrapper++
   }
   marginContentWrapper = (contentSectionWidth - contentWrapperWidth * countVisibleContentWrapper) / (countVisibleContentWrapper - 1) - 0.1
+  if (countVisibleContentWrapper === 1) marginContentWrapper = 40
   contentWrapperAll.forEach((el, index) => index ? el.style.marginLeft = marginContentWrapper + "px" : false)
 }
 resizeMargin()
@@ -74,7 +75,7 @@ const scrollContentLine = (direction = "right") => {
   }
   if (typeof direction === "number") {
     currentContentScroll = Math.max(Math.min(direction + currentContentScroll, 0), -maxScrollLength)
-    currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * 3 / contentSectionWidth  / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
+    currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * 2 / contentSectionWidth / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
   }
   
   contentLine.style.left = currentContentScroll + "px"
