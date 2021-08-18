@@ -75,7 +75,9 @@ const scrollContentLine = (direction = "right") => {
   }
   if (typeof direction === "number") {
     currentContentScroll = Math.max(Math.min(direction + currentContentScroll, 0), -maxScrollLength)
-    currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * 2 / contentSectionWidth / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
+    let displayMult = 2
+    if (countVisibleContentWrapper === 1) displayMult = 3
+    currentLineScroll = Math.min(Math.max(currentLineScroll - (direction * scrollTrackWidth * displayMult / contentSectionWidth / (contentWrappers.length - countVisibleContentWrapper)), 0), (scrollTrackWidth - scrollLineWidth))
   }
   
   contentLine.style.left = currentContentScroll + "px"
